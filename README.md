@@ -1,5 +1,7 @@
 # KEDA Event-Driven Autoscaling Demo
 
+[![CI](https://github.com/sremayank/keda-event-driven-autoscaling-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/sremayank/keda-event-driven-autoscaling-demo/actions/workflows/ci.yml)
+
 Reference demo for queue-driven Kubernetes autoscaling with KEDA.
 
 This sample shows a small Redis-backed worker system that scales based on queue depth. It is intentionally lightweight so the important platform pattern is easy to inspect: workloads should scale with actual event pressure, not only CPU or static replica counts.
@@ -127,3 +129,10 @@ This demo keeps the moving parts small. In production, I would add:
 ```bash
 make delete
 ```
+
+## GitHub Actions
+
+This repo includes:
+
+- `CI`: runs on push and pull requests. It compiles the Python worker/producer, validates YAML syntax, renders the Kubernetes manifests, checks schemas with kubeconform, and builds the Docker image.
+- `Kind Smoke Test`: manual workflow for a full local-cluster check. It creates a kind cluster, installs KEDA, loads the demo image, applies the manifests, and verifies the KEDA resources.
